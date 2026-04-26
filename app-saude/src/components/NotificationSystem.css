@@ -1,0 +1,48 @@
+.notification-banner {
+  margin: 0 20px 20px 20px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notification-icon {
+  color: var(--primary-color);
+}
+
+.notification-text strong {
+  display: block;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.notification-text p {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.btn-allow {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-allow:hover {
+  background: var(--primary-color-hover);
+}

@@ -1,0 +1,94 @@
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.list-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.medications {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.med-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.med-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--primary-color);
+  border-radius: 4px 0 0 4px;
+}
+
+.med-card.taken::before {
+  background: var(--secondary-color);
+}
+
+.med-card.taken {
+  opacity: 0.7;
+}
+
+.med-card.taken h3 {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.med-info h3 {
+  font-size: 18px;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+  transition: all 0.3s;
+}
+
+.med-info p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.med-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.active-check {
+  background: var(--secondary-color);
+  color: white;
+  border-color: var(--secondary-color);
+}
+
+.active-check:hover {
+  background: #059669; /* darker green */
+}
+
+.btn-icon.danger {
+  color: var(--danger-color);
+}
+
+.btn-icon.danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+  background: rgba(0,0,0,0.1);
+  border-radius: 12px;
+  border: 1px dashed var(--border-color);
+}

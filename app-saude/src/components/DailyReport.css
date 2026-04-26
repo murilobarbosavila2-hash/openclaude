@@ -1,0 +1,113 @@
+.report-header {
+  margin-bottom: 24px;
+}
+
+.report-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.report-header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.progress-card {
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.progress-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--secondary-color);
+  display: block;
+}
+
+.progress-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.progress-stats {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.progress-bar-bg {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--secondary-color);
+  border-radius: 4px;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px var(--secondary-color);
+}
+
+.report-list h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  margin-left: 12px;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+.timeline-icon {
+  position: absolute;
+  left: -25px; /* Aligns with the border */
+  background: var(--bg-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-content h4 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.timeline-content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.timeline-content.taken h4 {
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+.empty-text {
+  color: var(--text-secondary);
+  font-style: italic;
+}
