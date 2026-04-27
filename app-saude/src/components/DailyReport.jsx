@@ -5,20 +5,27 @@ import './DailyReport.css';
 const DailyReport = () => {
   const { medications, history } = useMedication();
   
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayDate = new Date();
+  const todayStr = todayDate.toISOString().split('T')[0];
+  const todayDayOfWeek = todayDate.getDay(); // 0 a 6 (Dom a Sab)
   const todaysHistory = history[todayStr] || [];
 
-  const totalMeds = medications.length;
-  const takenMeds = todaysHistory.length;
+  // Filtra apenas os remédios que o usuário marcou para tomar no dia da semana atual
+  const todaysMedications = medications.filter(med => 
+    !med.days || med.days.includes(todayDayOfWeek)
+  );
+
+  const totalMeds = todaysMedications.length;
+  // Conta como 'tomado' apenas os que fazem parte dos remédios de hoje
+  const takenMeds = todaysMedications.filter(med => todaysHistory.includes(med.id)).length;
   
-  // Prevent division by zero
   const progressPercentage = totalMeds === 0 ? 0 : Math.round((takenMeds / totalMeds) * 100);
 
   return (
     <div className="report-container">
       <div className="report-header">
         <h2>Progresso Diário</h2>
-        <p>Acompanhe suas medicações de hoje</p>
+        <p>Acompanhe suas medicações agendadas para hoje</p>
       </div>
 
       <div className="glass-card progress-card">
@@ -42,11 +49,11 @@ const DailyReport = () => {
 
       <div className="report-list">
         <h3>Detalhes de Hoje</h3>
-        {medications.length === 0 ? (
-          <p className="empty-text">Sem medicamentos cadastrados.</p>
+        {todaysMedications.length === 0 ? (
+          <p className="empty-text">Sem medicamentos programados para hoje.</p>
         ) : (
           <div className="timeline">
-            {medications.map(med => {
+            {todaysMedications.map(med => {
               const isTaken = todaysHistory.includes(med.id);
               return (
                 <div key={med.id} className="timeline-item">

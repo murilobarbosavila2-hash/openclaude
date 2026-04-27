@@ -1,4 +1,4 @@
-import { Home, Calendar } from 'lucide-react';
+import { Home, Stethoscope, Calendar } from 'lucide-react';
 import './BottomNavigation.css';
 
 const BottomNavigation = ({ activeTab, setActiveTab }) => {
@@ -8,15 +8,23 @@ const BottomNavigation = ({ activeTab, setActiveTab }) => {
         className={`nav-item ${activeTab === 'reminders' ? 'active' : ''}`}
         onClick={() => setActiveTab('reminders')}
       >
-        <Home size={24} />
-        <span>Lembretes</span>
+        <Home size={22} />
+        <span>Remédios</span>
+      </button>
+
+      <button 
+        className={`nav-item ${activeTab === 'appointments' ? 'active' : ''}`}
+        onClick={() => setActiveTab('appointments')}
+      >
+        <Stethoscope size={22} />
+        <span>Consultas</span>
       </button>
       
       <button 
         className={`nav-item ${activeTab === 'report' ? 'active' : ''}`}
         onClick={() => setActiveTab('report')}
       >
-        <Calendar size={24} />
+        <Calendar size={22} />
         <span>Relatório</span>
       </button>
     </nav>

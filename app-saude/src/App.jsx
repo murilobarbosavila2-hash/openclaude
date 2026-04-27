@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { MedicationProvider } from './context/MedicationContext'
 import BottomNavigation from './components/BottomNavigation'
 import MedicationList from './components/MedicationList'
+import AppointmentList from './components/AppointmentList'
 import DailyReport from './components/DailyReport'
 import NotificationSystem from './components/NotificationSystem'
 import './index.css'
@@ -23,6 +24,7 @@ function App() {
 
         <main className="content-area">
           {activeTab === 'reminders' && <MedicationList />}
+          {activeTab === 'appointments' && <AppointmentList />}
           {activeTab === 'report' && <DailyReport />}
         </main>
 

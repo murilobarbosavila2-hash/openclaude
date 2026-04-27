@@ -1,0 +1,101 @@
+.appointment-list-container {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.appt-section {
+  margin-bottom: 28px;
+}
+
+.appt-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.appt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.appt-card {
+  padding: 0;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.appt-color-bar {
+  width: 5px;
+  min-height: 100%;
+  background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+  border-radius: 16px 0 0 16px;
+  flex-shrink: 0;
+}
+
+.appt-card.past .appt-color-bar {
+  background: var(--text-secondary);
+  opacity: 0.4;
+}
+
+.appt-card.past {
+  opacity: 0.55;
+}
+
+.appt-body {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 12px;
+}
+
+.appt-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.appt-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.appt-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.appt-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.appt-notes {
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid var(--border-color);
+  padding: 6px 10px;
+  border-radius: 0 8px 8px 0;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.appt-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}

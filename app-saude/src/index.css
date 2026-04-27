@@ -49,8 +49,8 @@ body {
   top: 0;
   z-index: 10;
   background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: var(--glass-border);
 }
 
@@ -59,7 +59,9 @@ body {
   font-weight: 700;
   background: linear-gradient(to right, #60a5fa, #34d399);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .content-area {
@@ -71,8 +73,8 @@ body {
 /* Glassmorphism Utilities */
 .glass-card {
   background: var(--surface-color);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border: var(--glass-border);
   border-radius: 16px;
   padding: 20px;

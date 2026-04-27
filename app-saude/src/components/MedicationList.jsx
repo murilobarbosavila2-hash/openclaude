@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Bell, Check, Trash2 } from 'lucide-react';
+import { Plus, Bell, Check, Trash2, Pencil } from 'lucide-react';
 import { useMedication } from '../context/MedicationContext';
 import MedicationForm from './MedicationForm';
 import './MedicationList.css';
@@ -7,9 +7,20 @@ import './MedicationList.css';
 const MedicationList = () => {
   const { medications, history, markAsTaken, markAsUntaken, removeMedication } = useMedication();
   const [showForm, setShowForm] = useState(false);
+  const [editingMed, setEditingMed] = useState(null);
   
   const todayStr = new Date().toISOString().split('T')[0];
   const todaysHistory = history[todayStr] || [];
+
+  const handleEdit = (med) => {
+    setEditingMed(med);
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setEditingMed(null);
+  };
 
   return (
     <div className="medication-list-container">
@@ -20,7 +31,7 @@ const MedicationList = () => {
         </button>
       </div>
 
-      {showForm && <MedicationForm onClose={() => setShowForm(false)} />}
+      {showForm && <MedicationForm onClose={handleCloseForm} editingMed={editingMed} />}
 
       <div className="medications">
         {medications.length === 0 ? (
@@ -43,6 +54,13 @@ const MedicationList = () => {
                     onClick={() => isTaken ? markAsUntaken(med.id, todayStr) : markAsTaken(med.id, todayStr)}
                   >
                     <Check size={20} />
+                  </button>
+                  <button 
+                    className="btn-icon"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onClick={() => handleEdit(med)}
+                  >
+                    <Pencil size={20} />
                   </button>
                   <button 
                     className="btn-icon danger"
