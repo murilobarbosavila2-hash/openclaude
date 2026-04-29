@@ -436,21 +436,28 @@ function confirmBooking(name, email) {
 
 async function sendToAPI(booking) {
   try {
+    // Build ISO datetime string: combine date + time with BRT offset (-03:00)
+    const d = new Date(booking.date);
+    const year  = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day   = String(d.getDate()).padStart(2, '0');
+    const dataHora = `${year}-${month}-${day}T${booking.time}:00-03:00`;
+
+    const payload = {
+      nome:     booking.clientName,
+      email:    booking.clientEmail,
+      servico:  booking.serviceName,
+      dataHora: dataHora,
+      duracao:  booking.duration,
+    };
+
+    console.log("Enviando agendamento:", payload);
+
     await fetch(API_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        clientName:   booking.clientName,
-        clientEmail:  booking.clientEmail,
-        professional: booking.proName,
-        service:      booking.serviceName,
-        price:        booking.priceLabel,
-        duration:     booking.duration,
-        date:         booking.date,
-        time:         booking.time,
-        timeEnd:      booking.timeEnd,
-      }),
+      body: JSON.stringify(payload),
     });
   } catch (err) {
     console.warn('Erro ao enviar para API:', err);
