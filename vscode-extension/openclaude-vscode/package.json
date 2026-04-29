@@ -12,14 +12,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onStartupFinished",
-    "onCommand:openclaude.start",
-    "onCommand:openclaude.startInWorkspaceRoot",
-    "onCommand:openclaude.openDocs",
-    "onCommand:openclaude.openSetupDocs",
-    "onCommand:openclaude.openWorkspaceProfile",
-    "onCommand:openclaude.openControlCenter",
-    "onView:openclaude.controlCenter"
+    "onStartupFinished"
   ],
   "main": "./src/extension.js",
   "files": [
@@ -77,7 +70,8 @@
         {
           "id": "openclaude.controlCenter",
           "name": "Control Center",
-          "type": "webview"
+          "type": "webview",
+          "icon": "media/openclaude.svg"
         }
       ]
     },
