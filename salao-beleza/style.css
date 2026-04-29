@@ -482,63 +482,26 @@ a { text-decoration: none; color: inherit; }
 .success-details .sd-value { font-weight: 600; color: var(--clr-text); }
 .btn-new-booking { margin-top: 8px; }
 
-/* --- Dashboard --- */
-.dashboard-filters {
-  display: flex; gap: 8px; margin-bottom: 20px;
-  overflow-x: auto; padding-bottom: 4px;
-}
-.filter-btn {
-  padding: 8px 18px; border-radius: 100px;
-  font-size: 0.82rem; font-weight: 500;
-  background: var(--clr-surface);
-  border: 1.5px solid var(--clr-border);
-  color: var(--clr-text-secondary);
-  transition: var(--transition);
-  white-space: nowrap;
-}
-.filter-btn:hover { border-color: var(--clr-primary-light); }
-.filter-btn.active {
-  background: var(--clr-primary); color: #fff;
-  border-color: var(--clr-primary);
-}
-.dashboard-list { display: flex; flex-direction: column; gap: 12px; }
-.dash-card {
+/* --- Painel da Rejane (Dashboard) --- */
+.calendar-container {
   background: var(--clr-surface);
   border: 1.5px solid var(--clr-border-light);
-  border-radius: var(--radius-md);
-  padding: 16px; transition: var(--transition);
-  animation: fadeSlideIn 0.35s ease both;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin-bottom: 24px;
 }
-.dash-card:hover { box-shadow: var(--shadow-sm); }
-.dash-card-top {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 10px;
+.calendar-container iframe {
+  display: block;
+  width: 100%;
+  min-height: 500px;
+  border: 0;
 }
-.dash-client { font-weight: 600; font-size: 0.95rem; }
-.dash-time {
-  font-size: 0.82rem; font-weight: 600;
-  color: var(--clr-primary);
-  background: var(--clr-primary-ghost);
-  padding: 4px 10px; border-radius: 100px;
+@media (min-width: 480px) {
+  .calendar-container iframe { min-height: 600px; }
 }
-.dash-card-body {
-  display: flex; flex-wrap: wrap; gap: 6px 16px;
-  font-size: 0.82rem; color: var(--clr-text-secondary);
-}
-.dash-tag {
-  display: inline-flex; align-items: center; gap: 4px;
-}
-.dash-empty {
-  text-align: center; padding: 48px 20px;
-  color: var(--clr-text-muted);
-}
-.dash-empty-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.5; }
-.dash-empty p { font-size: 0.9rem; }
-.dash-date-header {
-  font-family: var(--font-heading); font-weight: 600;
-  font-size: 0.85rem; color: var(--clr-text-secondary);
-  padding: 8px 0 4px; margin-top: 4px;
-  text-transform: capitalize;
+.btn-back-site {
+  margin-top: 4px;
 }
 
 /* --- Toast --- */

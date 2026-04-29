@@ -543,21 +543,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Dashboard
+  // Dashboard — Painel da Rejane
   elBtnDashboard.addEventListener('click', () => {
-    renderDashboard('all');
     goToStep('dashboard');
-    // Activate "all" filter
-    $$('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
   });
 
-  // Dashboard filters
-  $('#dashboard-filters').addEventListener('click', e => {
-    const btn = e.target.closest('.filter-btn');
-    if (!btn) return;
-    $$('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderDashboard(btn.dataset.filter);
+  // Voltar para o site (from dashboard)
+  $('#btn-back-site').addEventListener('click', () => {
+    goToStep(state.currentStep || 1);
   });
 
   // Calendar nav
