@@ -1,5 +1,5 @@
 /* =============================================
-   Studio Élise — Application Logic
+   Rejane Beauty — Application Logic
    ============================================= */
 
 // ── Google Apps Script API ─────────────────────
@@ -127,13 +127,16 @@ function renderProfessionals() {
   grid.innerHTML = PROFESSIONALS.map(p => `
     <div class="pro-card" data-id="${p.id}" tabindex="0" id="pro-card-${p.id}">
       <div class="pro-avatar">${p.emoji}</div>
-      <div class="pro-name">${p.name}</div>
-      <div class="pro-specialty">
-        <span>${p.specialty}</span>
+      <div class="pro-details">
+        <div class="pro-name">${p.name}</div>
+        <div class="pro-specialty">${p.specialty}</div>
+        <div class="pro-rating">
+          ${'★'.repeat(Math.floor(p.rating))}${p.rating % 1 >= 0.5 ? '½' : ''}
+          <span style="color:var(--clr-text-muted);margin-left:2px">${p.rating}</span>
+        </div>
       </div>
-      <div class="pro-rating">
-        ${'★'.repeat(Math.floor(p.rating))}${p.rating % 1 >= 0.5 ? '½' : ''}
-        <span style="color:var(--clr-text-muted);margin-left:2px">${p.rating}</span>
+      <div class="pro-arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
       </div>
     </div>
   `).join('');
@@ -233,11 +236,9 @@ function getWeekDays(offset) {
   today.setHours(0,0,0,0);
   const start = new Date(today);
   start.setDate(start.getDate() + offset * 7);
-  // Align to Monday if offset > 0, otherwise start from today
   if (offset === 0) {
     // start from today
   } else {
-    // find Monday of that week
     const dow = start.getDay();
     const diff = dow === 0 ? 1 : (dow === 1 ? 0 : 1 - dow);
     start.setDate(start.getDate() + diff);
@@ -310,7 +311,6 @@ function renderTimeSlots() {
   const pro = state.selectedPro;
   const date = state.selectedDate;
   const grid = $('#timeslots-grid');
-  const slotsNeeded = Math.ceil(svc.duration / SLOT_INTERVAL);
   const now = new Date();
 
   // Generate all slots
@@ -334,7 +334,6 @@ function renderTimeSlots() {
   );
 
   grid.innerHTML = slots.map(slot => {
-    // Check if slot overlaps with any booking
     const slotStart = slot.hour * 60 + slot.minute;
     const slotEnd = slotStart + svc.duration;
     const taken = bookedSlots.some(b => {
@@ -343,7 +342,6 @@ function renderTimeSlots() {
       return slotStart < bEnd && slotEnd > bStart;
     });
 
-    // Check if past
     const isPast = isToday(date) && (slot.hour < now.getHours() || (slot.hour === now.getHours() && slot.minute <= now.getMinutes()));
     const isActive = state.selectedTime === slot.label;
 
@@ -474,63 +472,6 @@ function renderSuccess(booking) {
     <div class="sd-row"><span class="sd-label">Valor:</span><span class="sd-value">${booking.priceLabel || 'R$ ' + booking.price + ',00'}</span></div>
     <div class="sd-row"><span class="sd-label">E-mail:</span><span class="sd-value">${booking.clientEmail}</span></div>
   `;
-}
-
-// ── Dashboard ──────────────────────────────────
-function renderDashboard(filter = 'all') {
-  const list = $('#dashboard-list');
-  let bookings = [...state.bookings].sort((a, b) => {
-    const da = new Date(a.date); const db = new Date(b.date);
-    if (da - db !== 0) return da - db;
-    return a.startMin - b.startMin;
-  });
-
-  const today = new Date(); today.setHours(0,0,0,0);
-  const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
-
-  if (filter === 'today') bookings = bookings.filter(b => isSameDay(new Date(b.date), today));
-  else if (filter === 'tomorrow') bookings = bookings.filter(b => isSameDay(new Date(b.date), tomorrow));
-
-  if (bookings.length === 0) {
-    list.innerHTML = `
-      <div class="dash-empty">
-        <div class="dash-empty-icon">📋</div>
-        <p>Nenhum agendamento ${filter === 'today' ? 'para hoje' : filter === 'tomorrow' ? 'para amanhã' : 'encontrado'}</p>
-      </div>
-    `;
-    return;
-  }
-
-  // Group by date
-  const groups = {};
-  bookings.forEach(b => {
-    const key = new Date(b.date).toDateString();
-    if (!groups[key]) groups[key] = [];
-    groups[key].push(b);
-  });
-
-  let html = '';
-  for (const [dateStr, items] of Object.entries(groups)) {
-    const d = new Date(dateStr);
-    const label = isToday(d) ? 'Hoje' : isTomorrow(d) ? 'Amanhã' : `${WEEKDAYS[d.getDay()]}, ${formatDate(d)}`;
-    html += `<div class="dash-date-header">📅 ${label}</div>`;
-    items.forEach((b, i) => {
-      html += `
-        <div class="dash-card" style="animation-delay:${i * 0.06}s" id="booking-${b.id}">
-          <div class="dash-card-top">
-            <span class="dash-client">${b.clientName}</span>
-            <span class="dash-time">${b.time} – ${b.timeEnd}</span>
-          </div>
-          <div class="dash-card-body">
-            <span class="dash-tag">${b.serviceIcon} ${b.serviceName}</span>
-            <span class="dash-tag">${b.proEmoji} ${b.proName}</span>
-            <span class="dash-tag">💰 R$ ${b.price}</span>
-          </div>
-        </div>
-      `;
-    });
-  }
-  list.innerHTML = html;
 }
 
 // ── Event Listeners ────────────────────────────
